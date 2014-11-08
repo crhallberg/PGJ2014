@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.Date; 
 
 Rect[] parts = new Rect[1];
 Rect[] pstate = new Rect[1];
@@ -139,13 +140,16 @@ void keyReleased()
 {
   if (controlPressed && keyCode == 90) {
     popHistory();
-  } 
+  }
+  if (keyCode == 79) {
+    openFile();
+  }
+  if (keyCode == 80) {
+    printToFile();
+  }
   if (keyCode == CONTROL) {
     controlPressed = false;
   }
-}
-
-void printToFile() {
 }
 
 class Rect
@@ -188,6 +192,9 @@ class Rect
   }
   boolean inside(float x, float y) {
     return !dead && x >= this.x && x <= this.x+this.w && y >= this.y && y <= this.y+this.h;
+  }
+  String toJSON() {
+    return "{x:"+this.x+", y:"+this.y+", w:"+this.w+", h:"+this.h+"}";
   }
 }
 
